@@ -656,5 +656,38 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+
+  {
+    id: "umbrella01",
+    image: "images/products/umbrella.jpg",
+    name: "miltary grade umbrella",
+    rating: {
+      stars: 4.5,
+      count: 3157
+    },
+    priceCents: 2400,
+    keywords: [
+      "sweaters",
+      "hoodies",
+      "apparel",
+      "mens"
+    ]
+  },
+  {
+    id: "backpack01",
+    image: "images/products/backpack.jpg",
+    name: "miltary grade backpack",
+    rating: {
+      stars: 4.5,
+      count: 3157
+    },
+    priceCents: 1800,
+    keywords: [
+      "sweaters",
+      "hoodies",
+      "apparel",
+      "mens"
+    ]
   }
 ];
