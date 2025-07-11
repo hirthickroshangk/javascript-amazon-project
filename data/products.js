@@ -1,4 +1,4 @@
-const products = [
+export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -680,7 +680,7 @@ const products = [
     name: "miltary grade backpack",
     rating: {
       stars: 4.5,
-      count: 3157
+      count: 1235
     },
     priceCents: 1800,
     keywords: [
