@@ -155,11 +155,16 @@ document.querySelectorAll('.js-update-quantity-link')
       const inputElement = document
       .querySelector(`.js-input-quantity-${productId}`);
       const newQuantity = Number(inputElement.value);
-      updateCartQuantity(productId,newQuantity);
-      updateCheckout();
-      updateCartHTML(productId,newQuantity);
+      if (newQuantity > 0 && newQuantity < 1000) {
+        updateCartQuantity(productId,newQuantity);
+        updateCheckout();
+        updateCartHTML(productId,newQuantity);
+      }
     });
-  });  
+  });
+  
+
+
 
 
 
