@@ -119,12 +119,7 @@ forEach((link) => {
     const productId = link.dataset.productId;
     deleteCartItem(productId);
     renderPaymentSummary();
-    const container = document.querySelector(
-      `.js-cart-item-container-${productId}`
-    );
-    container.remove();
-    updateCheckout();
-
+    renderOrderSummary();
   }); 
 });
 
@@ -174,6 +169,7 @@ document.querySelectorAll('.js-update-quantity-link')
         updateCartQuantity(productId,newQuantity);
         updateCheckout();
         updateCartHTML(productId,newQuantity);
+        renderPaymentSummary();
       }
     } 
 
