@@ -1,32 +1,22 @@
 import { cart, deleteCartItem, calculateCartQuantity,
   updateCartQuantity, updateDeliveryOption } from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { getProduct, products } from '../../data/products.js';
 import formatCurrency  from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import {deliveryOptions} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 
 export function renderOrderSummary() {
 
 let cartSummaryHTML = '';
 cart.forEach((cartItem)   => {
-  let matchingProduct;
-  products.forEach((product) => {
-    if(product.id === cartItem.productId) {
-      matchingProduct = product;
-    }
-  });
-  let matchingDeliveryOption;
-  deliveryOptions.forEach((option) => {
-    if(option.id === cartItem.deliveryOptionId) {
-      matchingDeliveryOption = option;
-    }
-  });
+  let matchingProduct = getProduct(cartItem.productId);
+  
+  const deliveryOptionId = cartItem.deliveryOptionId;  
+  const matchingDeliveryOption = getDeliveryOption(deliveryOptionId);
+  
   const todayDate = dayjs();
   const deliveryDate = todayDate.add(`${matchingDeliveryOption.deliveryDays}`,'days');
   const formatedDeliveryDate = deliveryDate.format('dddd, MMMM DD');
-
-
-
 
   cartSummaryHTML += `
   <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
