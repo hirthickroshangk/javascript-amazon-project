@@ -1,4 +1,5 @@
-import { cart, deleteCartItem, calculateCartQuantity, updateCartQuantity } from '../data/cart.js';
+import { cart, deleteCartItem, calculateCartQuantity,
+  updateCartQuantity, updateDeliveryOption } from '../data/cart.js';
 import { products } from '../data/products.js';
 import formatCurrency  from './utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -21,8 +22,8 @@ cart.forEach((cartItem)   => {
     }
   });
   const todayDate = dayjs();
-  const deliverDate = todayDate.add(`${matchingDeliveryOption.deliveryDays}`,'days');
-  const formatedDeliveryDate = deliverDate.format('dddd, MMMM DD');
+  const deliveryDate = todayDate.add(`${matchingDeliveryOption.deliveryDays}`,'days');
+  const formatedDeliveryDate = deliveryDate.format('dddd, MMMM DD');
 
 
 
@@ -86,18 +87,20 @@ cart.forEach((cartItem)   => {
 function renderDeliveryOptions(cartItem) {
   let deliveryOptionsHTML = '';
   
-  deliveryOptions.forEach((deliverOption) => {
+  deliveryOptions.forEach((deliveryOption) => {
     const todayDate = dayjs();
-    const deliverDate = todayDate.add(`${deliverOption.deliveryDays}`,'days');
-    const formatedDeliveryDate = deliverDate.format('dddd, MMMM DD');
-    const priceString = deliverOption.priceCents === 0 
+    const deliveryDate = todayDate.add(`${deliveryOption.deliveryDays}`,'days');
+    const formatedDeliveryDate = deliveryDate.format('dddd, MMMM DD');
+    const priceString = deliveryOption.priceCents === 0 
     ?
     'FREE'
-    : `${formatCurrency(deliverOption.priceCents)} -`;
-    const isChecked = deliverOption.id === cartItem.deliveryOptionId;
+    : `${formatCurrency(deliveryOption.priceCents)} -`;
+    const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
     
     deliveryOptionsHTML += `
-      <div class="delivery-option">
+      <div class="delivery-option js-delivery-option" 
+      data-product-id = "${cartItem.productId}" 
+      data-delivery-option-id = "${deliveryOption.id}">
         <input type="radio"
           ${isChecked ? 'checked' : ''}
           class="delivery-option-input"
@@ -186,6 +189,16 @@ document.querySelectorAll('.js-update-quantity-link')
         updateCartHTML(productId,newQuantity);
       }
     } 
+
+  document.querySelectorAll('.js-delivery-option')
+   .forEach((element) => {
+    element.addEventListener('click',() => {
+      const {productId,deliveryOptionId} = element.dataset;  
+      updateDeliveryOption(productId,deliveryOptionId);
+      });
+
+   });  
+
 
 
 
