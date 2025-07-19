@@ -125,10 +125,6 @@ forEach((link) => {
 
 
 
-function updateCartHTML(productId,newQuantity) {
-  document.querySelector(`.js-quantity-label-${productId}`)
-    .innerHTML = `${newQuantity}`;
-}
 
 document.querySelectorAll('.js-update-quantity-link')
   .forEach((updateLink) => {
@@ -162,8 +158,8 @@ document.querySelectorAll('.js-update-quantity-link')
       if (newQuantity > 0 && newQuantity < 1000) {
         updateCartQuantity(productId,newQuantity);
         renderCheckoutHeader();
-        updateCartHTML(productId,newQuantity);
         renderPaymentSummary();
+        renderOrderSummary();
       }
     } 
 
