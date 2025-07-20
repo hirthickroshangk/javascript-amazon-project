@@ -82,12 +82,19 @@ function showAddedMessage(addedMessageTimeouts,productId) {
   addedMessageTimeouts = timeoutId;
 }
 
+function getSelectorQuantity(productId) {
+  const selectorElement = document.querySelector(`.js-quantity-selector-${productId}`);
+  const selectorQuantity = selectorElement.value;
+  return Number(selectorQuantity);
+}
+
 document.querySelectorAll('.js-add-to-cart-button').
 forEach(button => {
   let addedMessageTimeouts;
   button.addEventListener('click', () => {
     const {productId} = button.dataset;
-    addToCart(productId);
+    const selectorQuantity = getSelectorQuantity(productId);
+    addToCart(productId,selectorQuantity);
     updateCartQuantity();
     showAddedMessage(addedMessageTimeouts,productId);
   });
