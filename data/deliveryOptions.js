@@ -46,6 +46,16 @@ export function calculateDeliveryDate(deliveryOption) {
   return deliveryDate.format('dddd, MMMM D');
 }
 
+export function isValidDeliveryOption(deliveryOption) {
+  let found = false;
+  deliveryOptions.forEach((option) => {
+    if (option.id === deliveryOption) {
+      found = true;
+    }
+  });
+  return found;
+}
+
 
 
 

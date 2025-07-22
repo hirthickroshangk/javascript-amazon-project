@@ -30,10 +30,11 @@ cart.forEach((cartItem)   => {
                 src="${matchingProduct.image}">
 
               <div class="cart-item-details">
-                <div class="product-name">
+                <div class="product-name
+                product-name-${matchingProduct.id}">
                   ${matchingProduct.name}
                 </div>
-                <div class="product-price">
+                <div class="product-price product-price-${matchingProduct.id}">
                   $${formatCurrency(matchingProduct.priceCents)}
                 </div>
                 <div class="product-quantity
@@ -90,12 +91,12 @@ function renderDeliveryOptions(cartItem) {
     const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
     
     deliveryOptionsHTML += `
-      <div class="delivery-option js-delivery-option" 
+      <div class="delivery-option js-delivery-option js-delivery-option-${cartItem.productId}-${deliveryOption.id}" 
       data-product-id = "${cartItem.productId}" 
       data-delivery-option-id = "${deliveryOption.id}">
         <input type="radio"
           ${isChecked ? 'checked' : ''}
-          class="delivery-option-input"
+          class="delivery-option-input js-delivery-input-${cartItem.productId}-${deliveryOption.id}"
           name="delivery-option-${cartItem.productId}">
         <div>
           <div class="delivery-option-date">
@@ -144,9 +145,11 @@ document.querySelectorAll('.js-update-quantity-link')
     const productId = saveLink.dataset.productId;
     const inputElement = document
       .querySelector(`.js-input-quantity-${productId}`);
+    
     saveLink.addEventListener('click',() => {
      handleUpdate(productId,inputElement);
     });
+
     inputElement.addEventListener('keydown',(event) => {
       if(event.key === 'Enter') handleUpdate(productId,inputElement);
     });
