@@ -35,6 +35,32 @@ class Products {
     return "";
   }
 }
+/*
+const dateClass = new Date();
+const time = dateClass.toLocaleTimeString();
+const date = dateClass.toLocaleDateString();
+console.log(time,date);
+*/
+/*
+const obj1 = {
+  a: 2,
+  obj2() {
+   const b = this.a;
+   return b;
+  },
+  c : this.a
+}
+console.log(obj1.obj2());
+console.log(obj1.c);
+*/
+/*
+function logYourName() {
+  console.log('logged ' + this);
+}
+logYourName();
+logYourName.call('hirthick roshan');
+*/
+
 
 class Clothing extends Products {
   constructor(productDetails){
