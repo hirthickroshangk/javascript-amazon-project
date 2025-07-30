@@ -9,7 +9,7 @@ export function getProduct(cartId) {
   return matchingProduct;
 }
 
-class Products {
+export class Products {
   id;
   image;
   name;
@@ -35,34 +35,8 @@ class Products {
     return "";
   }
 }
-/*
-const dateClass = new Date();
-const time = dateClass.toLocaleTimeString();
-const date = dateClass.toLocaleDateString();
-console.log(time,date);
-*/
-/*
-const obj1 = {
-  a: 2,
-  obj2() {
-   const b = this.a;
-   return b;
-  },
-  c : this.a
-}
-console.log(obj1.obj2());
-console.log(obj1.c);
-*/
-/*
-function logYourName() {
-  console.log('logged ' + this);
-}
-logYourName();
-logYourName.call('hirthick roshan');
-*/
 
-
-class Clothing extends Products {
+export class Clothing extends Products {
   constructor(productDetails){
     super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
@@ -74,9 +48,25 @@ class Clothing extends Products {
     </a>`;
    }
 }
+export class Appliance extends Products {
+  instructionLink;
+  warrantyLink;
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionLink = productDetails.instructionLink;
+    this.warrantyLink = productDetails.warrantyLink;
+  }
 
-
-
+  extraInfoHTML() {
+    return `<a href = "${this.instructionLink}" target = "_blank">
+      Instructions
+    </a>
+    <a href = "${this.warrantyLink}" target = "_blank">
+      Warranty
+    </a>
+    `;
+   }
+  }
 
 export const products = [
   {
@@ -319,6 +309,7 @@ export const products = [
       count: 846
     },
     priceCents: 3074,
+    type: 'appliance',
     keywords: [
       "water boiler",
       "appliances",
@@ -773,6 +764,11 @@ export const products = [
 ].map((productDetails) => {
   if(productDetails.type === 'clothing') {
     return new Clothing(productDetails);
+  } 
+  else if(productDetails.keywords.includes('appliances')) {
+    productDetails.instructionLink = '../images/appliance-instructions.png';
+    productDetails.warrantyLink = '../images/appliance-warranty.png';    
+    return new Appliance(productDetails);
   }
   return new Products(productDetails);
 });
