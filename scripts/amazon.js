@@ -2,6 +2,7 @@ import { addToCart, calculateCartQuantity } from "../data/cart.js";
 import { products, loadProducts } from "../data/products.js";
 import '../data/car.js';
 
+
 loadProducts(loadProductGrid);
 
 function loadProductGrid() {

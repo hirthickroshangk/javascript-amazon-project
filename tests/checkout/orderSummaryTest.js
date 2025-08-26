@@ -2,16 +2,32 @@ import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart, updateCartQuantity } from '../../data/cart.js';
 import { getProduct } from "../../data/products.js";
 import formatCurrency from "../../scripts/utils/money.js";
+import {loadProducts} from "../../data/products.js";
 
 
 
 describe('test suite: renderOrderSummary', () => {
-  const product1Id = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
-  const product2Id = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
-  const product1Name = getProduct(product1Id).name;
-  const product2Name = getProduct(product2Id).name;
-  const product1Price = `$${formatCurrency(getProduct(product1Id).priceCents)}`;
-  const product2Price =`$${formatCurrency(getProduct(product2Id).priceCents)}`;
+  let product1Id;
+  let product2Id;
+  let product1Name;
+  let product2Name;
+  let product1Price;
+  let product2Price;
+  
+  beforeAll((done) => {
+    loadProducts(() => {
+      product1Id = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+      product2Id = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
+      product1Name = getProduct(product1Id).name;
+      product2Name = getProduct(product2Id).name;
+      product1Price = `$${formatCurrency(getProduct(product1Id).priceCents)}`;
+      product2Price =`$${formatCurrency(getProduct(product2Id).priceCents)}`;
+      done();
+    });
+    
+  }); 
+
+  
   
   beforeEach(() => {
     

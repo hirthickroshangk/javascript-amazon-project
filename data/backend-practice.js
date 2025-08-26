@@ -1,9 +1,9 @@
-const xhr = new XMLHttpRequest();
-xhr.addEventListener('load', () => {
-  console.log(xhr.response);
+const img = new XMLHttpRequest;
+img.addEventListener('load', () => {
+  console.log(img.response);
 });
-xhr.open('GET', 'https://supersimplebackend.dev/images/apple.jpg ');
-xhr.send();
+img.open('GET','https:/supersimplebackend.dev/images/apple.jpg');
+img.send();
 
 
  
