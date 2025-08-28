@@ -69,6 +69,34 @@ export class Appliance extends Products {
   }
 export let products = [];
 
+export function loadProductFetch() {
+  const promise =  fetch('http://supersimplebackend.dev/products')
+  .then((response) => {
+    return response.json();
+  })
+  .then((productData) => {
+    products = productData.map((productDetails) => {
+      if(productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } 
+      else if(productDetails.keywords.includes('appliances')) {
+        productDetails.instructionLink = '../images/appliance-instructions.png';
+        productDetails.warrantyLink = '../images/appliance-warranty.png';    
+        return new Appliance(productDetails);
+      }
+      return new Products(productDetails);
+    });
+    console.log('load products');
+  });
+
+  return promise;
+}
+/*
+loadProductFetch().then(() => {
+  console.log('next step');
+});
+*/
+
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
