@@ -87,7 +87,9 @@ export function loadProductFetch() {
       return new Products(productDetails);
     });
     console.log('load products');
-  });
+  })/*catch(() => {
+    console.log('unexpectedly we met a error');
+  });*/
 
   return promise;
 }
@@ -99,6 +101,9 @@ loadProductFetch().then(() => {
 
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
+  
+  
+  
   xhr.addEventListener('load', () => {
     products =  JSON.parse(xhr.response).map((productDetails) => {
       if(productDetails.type === 'clothing') {
@@ -117,7 +122,16 @@ export function loadProducts(fun) {
   });
   xhr.open('GET','http://supersimplebackend.dev/products');
   xhr.send();
+
+  xhr.addEventListener('error', (error) => {
+    console.log('there is a untechnical error!!',error);
+  });
+  xhr.open('GET', 'http://error.supersimplebackend.dev/products');
+  xhr.send();
 }
+
+
+
 
 
 

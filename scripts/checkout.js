@@ -9,12 +9,25 @@ import { loadCart } from '../data/cart.js';
 
 
 async function loadProducts2() {
+try {
+
   await loadProductFetch();
-  const value1 = await new Promise((resolve) => {
+  const value1 = await new Promise((resolve, reject) => {
+
     loadCart(() => {
+      reject('error3');
       resolve('value01');
     });
   });
+} catch(error) {
+
+  console.log('unexpectedly we met with a error, please give us time to rectify it');
+
+  
+    
+}
+
+  
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
