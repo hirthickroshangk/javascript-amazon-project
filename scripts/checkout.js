@@ -2,7 +2,7 @@ import { renderCheckoutHeader } from './checkout/checkoutHeader.js';
 import { renderOrderSummary } from './checkout/orderSummary.js';
 import { renderPaymentSummary } from './checkout/paymentSummary.js';
 import { loadProductFetch, loadProducts } from '../data/products.js';
-import { loadCart } from '../data/cart.js';
+import { loadCart, loadCartFetch } from '../data/cart.js';
 //import '../data/cart-class.js';
 //import '../../data/backend-practice.js'; 
 
@@ -11,14 +11,26 @@ import { loadCart } from '../data/cart.js';
 async function loadProducts2() {
 try {
 
-  await loadProductFetch();
+  await Promise.all ([
+    loadProductFetch(),
+    loadCartFetch()
+  ]);
+
+
+  
+
+
+
+  /*
   const value1 = await new Promise((resolve, reject) => {
 
     loadCart(() => {
-      reject('error3');
+      //reject('error3')
       resolve('value01');
     });
   });
+  */
+  
 } catch(error) {
 
   console.log('unexpectedly we met with a error, please give us time to rectify it');
