@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+  
+  <script>
+    const request = new XMLHttpRequest();
+    request.addEventListener('load', () => {
+      console.log(request.response);
+    });
+    request.open('GET', 'https://supersimplebackend.dev/greeting');
+    request.send();
+
+    fetch('https://supersimplebackend.dev/greeting').then(response => {
+      return response.text();
+    }).then(text => {
+     console.log(text);
+    })
+
+    async function loadGreeting() {
+    const response = await fetch('https://supersimplebackend.dev/greeting');
+    const text =  await response.text();
+    console.log(text);
+    }
+    loadGreeting();
+
+    async function loadPostGreeting() {
+      const response = await fetch('https://supersimplebackend.dev/greeting', {
+        method: 'POST',
+        headers: {
+         'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          name: 'HIRTHICK'  
+        })
+      });
+      const text = await response.text();
+      console.log(text); 
+    }
+    loadPostGreeting();
+
+    async function amazonRequest() {
+      try {
+        const promise = await fetch('https://amazon.com');
+        const response = await promise.json();
+        console.log(response);
+      } catch(error) {
+        console.log('CORS ERROR, your request is blocked by the backend ');
+      }
+    }
+    amazonRequest();
+    
+
+
+    async function emptyRequest() {
+      try{
+        const promise = await fetch('https://supersimplebackend.dev/greeting', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (promise.status >= 400) {
+          throw promise;  
+        }
+
+        const response = await promise.text(); 
+        console.log(response);
+      } catch(error) {
+          if (error.status === 400) {
+           console.log(error);
+          } else {
+            console.log('Network Error!! try after some time.');
+          } 
+      }
+    }
+    emptyRequest();
+    
+
+    
+  </script>
+</body>
+</html>
