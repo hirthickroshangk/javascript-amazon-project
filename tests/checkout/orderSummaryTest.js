@@ -13,6 +13,16 @@ describe('test suite: renderOrderSummary', () => {
   let product2Name;
   let product1Price;
   let product2Price;
+
+  beforeAll(async() => {
+    await loadProductFetch();
+      product1Id = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+      product2Id = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
+      product1Name = getProduct(product1Id).name;
+      product2Name = getProduct(product2Id).name;
+      product1Price = `$${formatCurrency(getProduct(product1Id).priceCents)}`;
+      product2Price =`$${formatCurrency(getProduct(product2Id).priceCents)}`;
+    }); 
   
   beforeAll((done) => {
     loadProductFetch().then ( () => {
