@@ -15,6 +15,7 @@ export class Products {
   name;
   rating;
   priceCents; 
+  keywords;
 
   constructor(product) {
     this.id = product.id;
@@ -22,6 +23,7 @@ export class Products {
     this.name = product.name;
     this.rating = product.rating;
     this.priceCents = product.priceCents;
+    this.keywords = product.keywords;
   }
  
   getStarsUrl() {
